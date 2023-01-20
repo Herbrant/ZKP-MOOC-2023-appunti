@@ -63,6 +63,6 @@ Un linguaggio $L$ è un insieme di stringhe binarie $x$ che soddisfano una qualc
 
 ### Definizione di linguaggio NP
 Un linguaggio $\mathcal{L}$ è un linguaggio *NP* (o NP-decision problem), se esiste un verifier $V$ polinomialmente limitato ($poly(|x|)$) per cui valgono le seguenti proprietà
-- **Completeness** se $x \in \mathcal{L}$ esiste una prova poly($|x|$)-long $w \in \{0,1\}^* : V(x,w)=1$; 
+- **Completeness** se $x \in \mathcal{L}$ esiste una prova $poly(|x|)$-long $w \in \{0,1\}^* : V(x,w)=1$; 
 - **Soundness** se $x \notin \mathcal{L} \forall w \in \{0,1\}^*, V(x,w) = 0$
 
