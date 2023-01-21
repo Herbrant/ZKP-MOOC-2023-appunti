@@ -66,3 +66,75 @@ Un linguaggio $\mathcal{L}$ è un linguaggio *NP* (o NP-decision problem), se es
 - **Completeness** se $x \in \mathcal{L}$ esiste una prova $poly(|x|)$-long $w \in \{0,1\}^* : V(x,w)=1$; 
 - **Soundness** se $x \notin \mathcal{L} \forall w \in \{0,1\}^*, V(x,w) = 0$
 
+Tra il 1982 e il 1985 un team di ricerca, costituito da Micali, Goldwasser e Rackoff, si chiese se ero possibile fornire una dimostrazione interattiva dell'esempio 2 ($y$ è un quadrato residuo modulo $N$), senza dover fornire al Verifier la radice $x$. Da questo tentativo nascono le Zero-Knowledge Proof.
+
+## Zero Knowledge Interactive Proof
+Le prove interattive che abbiamo visto fino ad ora erano estremamente banali e si limitavano, semplicemente, a fornire al Verifier una prova della claim.
+
+Per arrivare al concetto di Zero Knowledge Interactive Proof abbiamo bisogno di due ulteriori "ingredienti":
+- **Interaction**: il Verifier non deve più limitarsi solo a leggere la prova passivamente ma deve interagire in modo non banale con il Prover;
+- **Randomness**: il Verifier esegue un algoritmo randomizzato; le domande che verranno fatte al Prover non sono deterministiche. Inoltre, il Verifier accetta o rifiuta una prova con una certa probabilità di errore.
+
+### Esempio 1
+#### Due colori sono differenti
+In questo esempio vogliamo che il Prover dimostri che una pagina è fatta da due colori distinti.
+Ad ogni passo, il Verifier lancia una monetina per decidere se ruotare la pagina (Testa -> ruoto la pagina, Croce -> lascio la pagina inalterata) e la invia al Prover.
+Se la pagina è stata ruotata, il Prover restituisce Testa al Verifier, Croce altrimenti.
+
+Ad ogni passo della dimostrazione vengono eseguiti i seguenti passi:
+1. il Verifier lancia una monetina e se ottiene Testa ruota l'immagine di partenza, altrimenti la lascia inalterata. Questa immagine viene inviata al Prover.
+2. il Prover, ricevuta l'immagine del Verifier, invia al Verifier Testa se riscontra che l'immagine è stata ruotata, croce altrimenti.
+3. il Verifier accetta se il Prover ha restituito la stessa faccia della monetina lanciata al passo 1
+
+```mermaid
+sequenceDiagram
+    participant Prover
+    participant Verifier
+    loop i = 1...k
+    Note over Verifier: Toss coin (Heads flip the page over, Tails don't)
+    Verifier->>Prover: Sends resulting page
+    Note over Prover: If page is flippet set coin' = heads else coin' = tails
+    Prover->>Verifier: coin'
+    Note over Verifier: if coin is equal to coin' accept, else reject
+    end
+```
+
+#### Analisi
+- Se la pagina contiene due colori, il Verifier accetterà
+- Se la pagina contiene un solo colore preso un qualsiasi Prover la probabilità di indovinare la faccia della moneta è pari a $1/2$, ovvero $Prob_{coins}(Verifier Accept) \leq 1/2$. Inoltre se ripetiamo l'esperimento $k$ volte: $Prob_{coins}(Verifier Accept) \leq 1/2^k$.
+
+### Esempio 2
+#### $y$ è quadrato residuo modulo $N$
+Torniamo al problema che volevamo risolvere: dimostrare che $y$ è un quadrato residuo modulo $N$. Per semplicità indicheremo con $x$ la radice quadrata di $y$ modulo $N$.
+
+```mermaid
+sequenceDiagram
+    participant Prover
+    participant Verifier
+    
+    Note over Prover: 1 <= r <= N : gcd(r,N) = 1 scelto random
+    Prover->>Verifier: s = r^2 mod n
+    Note over Verifier: b = random bit
+    Verifier->>Prover: b
+    Note over Prover: if b = 1: z = r else z = rx mod N
+    Prover->>Verifier: z
+    Note over Verifier: if z^2 = sy^b mod N
+```
+
+##### Analisi
+- Se $y$ è quadrato residuo allora il Verifier accetterà
+- Soundness: se $y$ non è quadrato residuo modulo $N$ allora $\forall$ prover $Prob_{Coins}(Verifier accept) \leq 1/2$. Se ripetiamo l'esperimento $k$ volte avremo che $\forall$ prover $Prob_{Coins}(Verifier accept) \leq 1/2^k$.
+
+## Interactive Proofs for a Language $\mathcal{L}$
+### Definizione (intuitiva)
+$(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e polinomialmente limitato ($poly(|x|)$) e valgono le seguenti proprietà
+- **Completeness**: se $x \in \mathcal{L}$, $V$ accetta sempre
+- **Soundness**: se $x \notin \mathcal{L}$ $\forall$ cheating prover strategy $V$ non accetta con alta probabilità (accetta con probabilità trascurabile).
+
+### Definizione (formale)
+$(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e polinomialmente limitato ($poly(|x|)$) e valgono le seguenti proprietà
+- **Completeness**: se $x \in \mathcal{L}$, $Pr[(P,V)(x) = accept] = 1$
+- **Soundness**: se $x \notin \mathcal{L}$ $\forall P^*$, $Pr[(P^*,V)(x) = accept] = negl(|x|)$
+
+dove $negl(\lambda) < \frac{1}{polynomial(\lambda)}$ per tutte le funzioni polinomiali.
+ 
