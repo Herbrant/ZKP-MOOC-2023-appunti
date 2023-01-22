@@ -133,8 +133,48 @@ $(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e pol
 
 ### Definizione (formale)
 $(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e polinomialmente limitato ($poly(|x|)$) e valgono le seguenti proprietà
-- **Completeness**: se $x \in \mathcal{L}$, $Pr[(P,V)(x) = accept] = 1$
-- **Soundness**: se $x \notin \mathcal{L}$ $\forall P^*$, $Pr[(P^*,V)(x) = accept] = negl(|x|)$
+- **Completeness**: se $x \in \mathcal{L}, Pr[(P,V)(x) = accept] = 1$
+- **Soundness**: se $x \notin \mathcal{L}, \forall P^*$, $Pr[(P^*,V)(x) = accept] = negl(|x|)$
 
 dove $negl(\lambda) < \frac{1}{polynomial(\lambda)}$ per tutte le funzioni polinomiali.
- 
+
+In alcuni casi non è possibile ottenere tali probabilità e, per questa ragione, dobbiamo tollerare una certa probabilità di errore.
+
+### Definizione
+$(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e polinomialmente limitato ($poly(|x|)$) e valgono le seguenti proprietà
+- **Completeness**: se $x \in \mathcal{L}, Pr[(P,V)(x) = accept] \geq c$
+- **Soundness**: se $x \notin \mathcal{L}, \forall P^*$, $Pr[(P^*,V)(x) = accept] \leq s$
+
+### Definizione (IP)
+Definiamo la classe dei linguaggi **IP** = {$\mathcal{L}$ per cui esiste un interactive proof}.
+
+## Zero-Knowledge
+Abbiamo definito cos'è una *proof* ma non abbiamo ancora dato una definizione di *Zero Knowledge*.
+
+Intuitivamente, vogliamo che quello che il Verifier può computare dopo l'interazione con il Prover è quello che poteva già computare prima dell'interazione stessa.
+
+Proviamo a formalizzare questo concetto.
+
+Dopo l'interazione con il Prover, il Verifier apprende:
+- che $x \in \mathcal{L}$
+- il transcript dell'interazione
+
+### Definizione (*view*)
+Definiamo la *view* del Verifier come $view_V(P, V)[x] = \{q_1,a_1,q_2,a_2,\dots, coins\_of\_V\}$ dove $a_i$ sono i messaggi inviati dal Prover, $q_j$ i messaggi inviati dal Verifier. 
+
+### Simulation Paradigm
+Per formalizzare la definizione di *Zero Knowledge* facciamo uso del paradigma dei simulatori.
+In particolare,
+> **Definizione:**  la *view* di V non gli fornisce nulla di nuovo se la *simulated view* e la *real view* sono computazionalmente indistinguibili.
+
+Il concetto di distinguibilità che intendiamo è quello che già conosciamo bene.
+
+Con gli strumenti che abbiamo visto fino ad ora possiamo formalizzare, finalmente, il concetto di *Zero Knowledge*.
+### Definizione (*Zero Knowledge*)
+Un protocollo interattivo $(P,V)$ gode della
+proprietà di *Zero-Knowledge* per un linguaggio $\mathcal{L}$ se esiste un simulatore *PPT* (probabilistico e polinomialmente limitato nel tempo) tale che $\forall x \in \mathcal{L}$ le seguenti distribuzioni di probabilità sono indistinguibili in tempo polinomiale:
+1. $view_V(P,V)[x] = \{q_1,a_1,q_2,a_2,\dots, coins\_of\_V\}$
+2. $Sim(x, 1^\lambda)$ 
+
+### Definizione (*Zero Knowledge Interactive Protocol*)
+$(P,V)$ è un *Zero-Knowledge Interactive Protocol* se gode delle proprità di *completeness*, *soundness* e *zero-knowledge*.
