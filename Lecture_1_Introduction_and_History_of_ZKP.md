@@ -173,8 +173,18 @@ Con gli strumenti che abbiamo visto fino ad ora possiamo formalizzare, finalment
 ### Definizione (*Zero Knowledge*)
 Un protocollo interattivo $(P,V)$ gode della
 proprietà di *Zero-Knowledge* per un linguaggio $\mathcal{L}$ se esiste un simulatore *PPT* (probabilistico e polinomialmente limitato nel tempo) tale che $\forall x \in \mathcal{L}$ le seguenti distribuzioni di probabilità sono indistinguibili in tempo polinomiale:
-1. $view_V(P,V)[x] = \{q_1,a_1,q_2,a_2,\dots, coins\_of\_V\}$
+1. $view_V(P,V)[x] = \{q_1,a_1,q_2,a_2,\dots,$ coins of V $\}$
 2. $Sim(x, 1^\lambda)$ 
 
 ### Definizione (*Zero Knowledge Interactive Protocol*)
 $(P,V)$ è un *Zero-Knowledge Interactive Protocol* se gode delle proprità di *completeness*, *soundness* e *zero-knowledge*.
+
+
+### Definizione (*Zero Knowledge if V is not honest*)
+$(P,V)$ gode della proprietà di *Zero Knowledge* per un linguaggio $\mathcal{L}$ se $\forall V^{*}$ (*PPT*), esiste un Simulatore (polinomialmente limitato) tale che $\forall x \in \mathcal{L}$ $$view_{V^{*}}(P,V^{*})[x] \approx Sim(x, 1^\lambda)$$
+
+In realtà possiamo definire tre livello di *Zero-Knowledge* in base alla relazione che c'è tra le due distribuzioni:
+
+- *Computationally indistinguishable distributions* (CZK): $view_{V^{*}}(P,V^{*})[x] \approx Sim(x, 1^\lambda)$
+- *Perfectly identical distribution* (PZK): $view_{V^{*}}(P,V^{*})[x] = Sim(x, 1^\lambda)$ (indistinguibilità anche nel caso di avversari non polinomialmente limitati)
+- *Statistically close distributions* (SZK)
