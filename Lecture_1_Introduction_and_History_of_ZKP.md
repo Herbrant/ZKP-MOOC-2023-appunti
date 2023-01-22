@@ -62,11 +62,11 @@ Le claim che abbiamo visto sono, in realtà, linguaggi.
 Un linguaggio $L$ è un insieme di stringhe binarie $x$ che soddisfano una qualche proprietà.
 
 ### Definizione di linguaggio NP
-Un linguaggio $\mathcal{L}$ è un linguaggio *NP* (o NP-decision problem), se esiste un verifier $V$ polinomialmente limitato ($poly(|x|)$) per cui valgono le seguenti proprietà
+Un linguaggio $\mathcal{L}$ è un linguaggio *NP* (o NP-decision problem), se esiste un verifier $V$ polinomialmente limitato ( $poly(|x|)$ ) per cui valgono le seguenti proprietà
 - **Completeness** se $x \in \mathcal{L}$ esiste una prova $poly(|x|)$-long $w \in \{0,1\}^* : V(x,w)=1$; 
 - **Soundness** se $x \notin \mathcal{L} \forall w \in \{0,1\}^*, V(x,w) = 0$
 
-Tra il 1982 e il 1985 un team di ricerca, costituito da Micali, Goldwasser e Rackoff, si chiese se ero possibile fornire una dimostrazione interattiva dell'esempio 2 ($y$ è un quadrato residuo modulo $N$), senza dover fornire al Verifier la radice $x$. Da questo tentativo nascono le Zero-Knowledge Proof.
+Tra il 1982 e il 1985 un team di ricerca, costituito da Micali, Goldwasser e Rackoff, si chiese se ero possibile fornire una dimostrazione interattiva dell'esempio 2 ( $y$ è un quadrato residuo modulo $N$), senza dover fornire al Verifier la radice $x$. Da questo tentativo nascono le Zero-Knowledge Proof.
 
 ## Zero Knowledge Interactive Proof
 Le prove interattive che abbiamo visto fino ad ora erano estremamente banali e si limitavano, semplicemente, a fornire al Verifier una prova della claim.
@@ -101,7 +101,7 @@ sequenceDiagram
 
 #### Analisi
 - Se la pagina contiene due colori, il Verifier accetterà
-- Se la pagina contiene un solo colore preso un qualsiasi Prover la probabilità di indovinare la faccia della moneta è pari a $1/2$, ovvero $Prob_{coins}(Verifier Accept) \leq 1/2$. Inoltre se ripetiamo l'esperimento $k$ volte: $Prob_{coins}(Verifier Accept) \leq 1/2^k$.
+- Se la pagina contiene un solo colore preso un qualsiasi Prover la probabilità di indovinare la faccia della moneta è pari a $1/2$, ovvero $Prob_{coins}($ Verifier Accept $) \leq 1/2$. Inoltre se ripetiamo l'esperimento $k$ volte: $Prob_{coins}($ Verifier Accept $) \leq 1/2^k$.
 
 ### Esempio 2
 #### $y$ è quadrato residuo modulo $N$
@@ -123,7 +123,7 @@ sequenceDiagram
 
 ##### Analisi
 - Se $y$ è quadrato residuo allora il Verifier accetterà
-- Soundness: se $y$ non è quadrato residuo modulo $N$ allora $\forall$ prover $Prob_{Coins}(Verifier accept) \leq 1/2$. Se ripetiamo l'esperimento $k$ volte avremo che $\forall$ prover $Prob_{Coins}(Verifier accept) \leq 1/2^k$.
+- Soundness: se $y$ non è quadrato residuo modulo $N$ allora $\forall$ prover $Prob_{Coins}($ Verifier Accept $) \leq 1/2$. Se ripetiamo l'esperimento $k$ volte avremo che $\forall$ prover $Prob_{Coins}($ Verifier Accept $) \leq 1/2^k$.
 
 ## Interactive Proofs for a Language $\mathcal{L}$
 ### Definizione (intuitiva)
@@ -132,21 +132,21 @@ $(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e pol
 - **Soundness**: se $x \notin \mathcal{L}$ $\forall$ cheating prover strategy $V$ non accetta con alta probabilità (accetta con probabilità trascurabile).
 
 ### Definizione (formale)
-$(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e polinomialmente limitato ($poly(|x|)$) e valgono le seguenti proprietà
+$(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e polinomialmente limitato ( $poly(|x|)$ ) e valgono le seguenti proprietà
 - **Completeness**: se $x \in \mathcal{L}, Pr[(P,V)(x) = accept] = 1$
-- **Soundness**: se $x \notin \mathcal{L}, \forall P^*$, $Pr[(P^*,V)(x) = accept] = negl(|x|)$
+- **Soundness**: se $x \notin \mathcal{L}, \forall P^\*$, $Pr[(P^\*,V)(x) = accept] = negl(|x|)$
 
 dove $negl(\lambda) < \frac{1}{polynomial(\lambda)}$ per tutte le funzioni polinomiali.
 
 In alcuni casi non è possibile ottenere tali probabilità e, per questa ragione, dobbiamo tollerare una certa probabilità di errore.
 
 ### Definizione
-$(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e polinomialmente limitato ($poly(|x|)$) e valgono le seguenti proprietà
+$(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e polinomialmente limitato ( $poly(|x|)$ ) e valgono le seguenti proprietà
 - **Completeness**: se $x \in \mathcal{L}, Pr[(P,V)(x) = accept] \geq c$
-- **Soundness**: se $x \notin \mathcal{L}, \forall P^*$, $Pr[(P^*,V)(x) = accept] \leq s$
+- **Soundness**: se $x \notin \mathcal{L}$, $\forall P^\*$, $Pr[(P^\*,V)(x) = accept] \leq s$
 
 ### Definizione (IP)
-Definiamo la classe dei linguaggi **IP** = {$\mathcal{L}$ per cui esiste un interactive proof}.
+Definiamo la classe dei linguaggi **IP** = { $\mathcal{L}$ per cui esiste un interactive proof }.
 
 ## Zero-Knowledge
 Abbiamo definito cos'è una *proof* ma non abbiamo ancora dato una definizione di *Zero Knowledge*.
