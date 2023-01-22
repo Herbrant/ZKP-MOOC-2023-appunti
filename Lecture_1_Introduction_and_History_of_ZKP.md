@@ -101,7 +101,7 @@ sequenceDiagram
 
 #### Analisi
 - Se la pagina contiene due colori, il Verifier accetterà
-- Se la pagina contiene un solo colore preso un qualsiasi Prover la probabilità di indovinare la faccia della moneta è pari a $1/2$, ovvero $Prob_{coins}($ Verifier Accept $) \leq 1/2$. Inoltre se ripetiamo l'esperimento $k$ volte: $Prob_{coins}($ Verifier Accept $) \leq 1/2^k$.
+- Se la pagina contiene un solo colore preso un qualsiasi Prover la probabilità di indovinare la faccia della moneta è pari a $1/2$, ovvero $Prob_{coins}(\text{Verifier Accept}) \leq 1/2$. Inoltre se ripetiamo l'esperimento $k$ volte: $Prob_{coins}(\text{Verifier Accept}) \leq 1/2^k$.
 
 ### Esempio 2
 #### $y$ è quadrato residuo modulo $N$
@@ -123,7 +123,7 @@ sequenceDiagram
 
 ##### Analisi
 - Se $y$ è quadrato residuo allora il Verifier accetterà
-- Soundness: se $y$ non è quadrato residuo modulo $N$ allora $\forall$ prover $Prob_{Coins}($ Verifier Accept $) \leq 1/2$. Se ripetiamo l'esperimento $k$ volte avremo che $\forall$ prover $Prob_{Coins}($ Verifier Accept $) \leq 1/2^k$.
+- Soundness: se $y$ non è quadrato residuo modulo $N$ allora $\forall$ prover $Prob_{Coins}(\text{Verifier Accept}) \leq 1/2$. Se ripetiamo l'esperimento $k$ volte avremo che $\forall$ prover $Prob_{Coins}(\text{Verifier Accept}) \leq 1/2^k$.
 
 ## Interactive Proofs for a Language $\mathcal{L}$
 ### Definizione (intuitiva)
@@ -133,8 +133,8 @@ $(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e pol
 
 ### Definizione (formale)
 $(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e polinomialmente limitato ( $poly(|x|)$ ) e valgono le seguenti proprietà
-- **Completeness**: se $x \in \mathcal{L}, Pr[(P,V)(x) = accept] = 1$
-- **Soundness**: se $x \notin \mathcal{L}, \forall P^\*$, $Pr[(P^\*,V)(x) = accept] = negl(|x|)$
+- **Completeness**: se $x \in \mathcal{L}, Pr[(P,V)(x) = \text{accept}] = 1$
+- **Soundness**: se $x \notin \mathcal{L}, \forall P^\*$, $Pr[(P^\*,V)(x) = \text{accept}] = negl(|x|)$
 
 dove $negl(\lambda) < \frac{1}{polynomial(\lambda)}$ per tutte le funzioni polinomiali.
 
@@ -142,8 +142,8 @@ In alcuni casi non è possibile ottenere tali probabilità e, per questa ragione
 
 ### Definizione
 $(P,V)$ è un interactive proof per $\mathcal{L}$ se $V$ è probabilistico e polinomialmente limitato ( $poly(|x|)$ ) e valgono le seguenti proprietà
-- **Completeness**: se $x \in \mathcal{L}, Pr[(P,V)(x) = accept] \geq c$
-- **Soundness**: se $x \notin \mathcal{L}$, $\forall P^\*$, $Pr[(P^\*,V)(x) = accept] \leq s$
+- **Completeness**: se $x \in \mathcal{L}, Pr[(P,V)(x) = \text{accept}] \geq c$
+- **Soundness**: se $x \notin \mathcal{L}$, $\forall P^\*$, $Pr[(P^\*,V)(x) = \text{accept}] \leq s$
 
 ### Definizione (IP)
 Definiamo la classe dei linguaggi **IP** = { $\mathcal{L}$ per cui esiste un interactive proof }.
@@ -160,7 +160,7 @@ Dopo l'interazione con il Prover, il Verifier apprende:
 - il transcript dell'interazione
 
 ### Definizione (*view*)
-Definiamo la *view* del Verifier come $view_V(P, V)[x] = \{q_1,a_1,q_2,a_2,\dots, coins\_of\_V\}$ dove $a_i$ sono i messaggi inviati dal Prover, $q_j$ i messaggi inviati dal Verifier. 
+Definiamo la *view* del Verifier come $view_V(P, V)[x] = \\{q_1,a_1,q_2,a_2,\dots, \text{coins of V} \\}$ dove $a_i$ sono i messaggi inviati dal Prover, $q_j$ i messaggi inviati dal Verifier. 
 
 ### Simulation Paradigm
 Per formalizzare la definizione di *Zero Knowledge* facciamo uso del paradigma dei simulatori.
@@ -173,7 +173,7 @@ Con gli strumenti che abbiamo visto fino ad ora possiamo formalizzare, finalment
 ### Definizione (*Zero Knowledge*)
 Un protocollo interattivo $(P,V)$ gode della
 proprietà di *Zero-Knowledge* per un linguaggio $\mathcal{L}$ se esiste un simulatore *PPT* (probabilistico e polinomialmente limitato nel tempo) tale che $\forall x \in \mathcal{L}$ le seguenti distribuzioni di probabilità sono indistinguibili in tempo polinomiale:
-1. $view_V(P,V)[x] = \{q_1,a_1,q_2,a_2,\dots,$ coins of V $\}$
+1. $view_V(P,V)[x] = \\{ q_1,a_1,q_2,a_2,\dots, \text{coins of V} \\} $
 2. $Sim(x, 1^\lambda)$ 
 
 ### Definizione (*Zero Knowledge Interactive Protocol*)
@@ -181,10 +181,10 @@ $(P,V)$ è un *Zero-Knowledge Interactive Protocol* se gode delle proprità di *
 
 
 ### Definizione (*Zero Knowledge if V is not honest*)
-$(P,V)$ gode della proprietà di *Zero Knowledge* per un linguaggio $\mathcal{L}$ se $\forall V^{*}$ (*PPT*), esiste un Simulatore (polinomialmente limitato) tale che $\forall x \in \mathcal{L}$ $$view_{V^{*}}(P,V^{*})[x] \approx Sim(x, 1^\lambda)$$
+$(P,V)$ gode della proprietà di *Zero Knowledge* per un linguaggio $\mathcal{L}$ se $\forall V^{*}$ (*PPT*), esiste un Simulatore (polinomialmente limitato) tale che $\forall x \in \mathcal{L}$ $$view_{V^{\*}}(P,V^{\*})[x] \approx Sim(x, 1^\lambda)$$
 
 In realtà possiamo definire tre livello di *Zero-Knowledge* in base alla relazione che c'è tra le due distribuzioni:
 
-- *Computationally indistinguishable distributions* (CZK): $view_{V^{*}}(P,V^{*})[x] \approx Sim(x, 1^\lambda)$
-- *Perfectly identical distribution* (PZK): $view_{V^{*}}(P,V^{*})[x] = Sim(x, 1^\lambda)$ (indistinguibilità anche nel caso di avversari non polinomialmente limitati)
+- *Computationally indistinguishable distributions* (CZK): $view_{V^{\*}}(P,V^{\*})[x] \approx Sim(x, 1^\lambda)$
+- *Perfectly identical distribution* (PZK): $view_{V^{\*}}(P,V^{\*})[x] = Sim(x, 1^\lambda)$ (indistinguibilità anche nel caso di avversari non polinomialmente limitati)
 - *Statistically close distributions* (SZK)
