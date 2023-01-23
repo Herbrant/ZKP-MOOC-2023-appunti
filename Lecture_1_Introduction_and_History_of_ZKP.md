@@ -116,7 +116,7 @@ sequenceDiagram
     Prover->>Verifier: s = r^2 mod n
     Note over Verifier: b = random bit
     Verifier->>Prover: b
-    Note over Prover: if b = 1: z = r else z = rx mod N
+    Note over Prover: if b = 1: z = rx mod N else z = r 
     Prover->>Verifier: z
     Note over Verifier: if z^2 = sy^b mod N
 ```
