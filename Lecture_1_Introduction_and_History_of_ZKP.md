@@ -192,7 +192,7 @@ In realtà possiamo definire tre livello di *Zero-Knowledge* in base alla relazi
 
 #### (Honest Verifier) Perfect Zero Knowledge
 Il protocollo che permette di dimostrare che $y$ è quadrato residuo modulo $N$ è un esempio di *Perfect Zero Knowledge*. In particolare, nel caso in cui assumiamo che il Verifier sia onesto, il simulatore $S$ si comporta come segue
-1. $b \leftarrow \{0,1\}$ scelto random
+1. $b \leftarrow \\{0,1\\}$ scelto random
 2. $z \in Z_N^*$ scelto random
 3. calcla $s = z^2/y^b$
 4. output $(s,b,z)$
@@ -201,7 +201,7 @@ La *view* generata dal simulatore è identica (Perfect Zero Knowledge) a quella 
 
 #### Perfect Zero Knowledge
 Supponiamo adesso di essere di fronte ad un Verifier, non necessariamente onesto. Il simulatore funziona come segue
-1. $b \leftarrow \{0,1\}$ scelto random
+1. $b \leftarrow \\{0,1\\}$ scelto random
 2. $z \in Z_N^*$ scelto random
 3. calcla $s = z^2/y^b$
 4. If $V^*(N,y,s) = b$ output $(s,b,z)$ else goto 
@@ -209,9 +209,9 @@ Supponiamo adesso di essere di fronte ad un Verifier, non necessariamente onesto
 Analizzando il protocollo, possiamo renderci conto che il Prover non solo ha dimostrato che $y$ è un quadrato residuo modulo $N$ ma anche di conoscere la sua radice $x$. Definiamo quindi il concetto di *Proof of knowledge* (POK).
 
 ### Definizione (*Proof of Knowledge*)
-Sia $L_R = \{x : \exists w : R(x,w) = \text{accept}\}$ per una relazione $R$ (tempo polinomiale).
+Sia $L_R = \\{x : \exists w : R(x,w) = \text{accept} \\}$ per una relazione $R$ (tempo polinomiale).
 
-$(P,V)$ è una *proof of knowledge* (POK)per $L_R$ se esiste un algoritmo PPT (knowledge) extractor $E$ tale che $\forall x \in L$, in tempo polinomiale $E^P(x)$ restituisce $w$ tale che $V(x,w) = \text{accept}$.
+$(P,V)$ è una *proof of knowledge* (POK) per $L_R$ se esiste un algoritmo PPT (knowledge) extractor $E$ tale che $\forall x \in L$, in tempo polinomiale $E^P(x)$ restituisce $w$ tale che $V(x,w) = \text{accept}$.
 
 $E^P$ sta ad indicare che l'algoritmo potrebbe essere eseguito $P$ volte utilizzando la stessa randomness. Questo vuol dire che il Verifier può fare più domande al Prover per ogni esecuzione. Questa tecnica è chiamata *rewinding technique*.
 
